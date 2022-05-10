@@ -10,6 +10,7 @@ wget -qO- $CONFIGXRAY | sed -e "s/\$AUUID/$AUUID/g" -e "s/\$ParameterSSENCYPT/$P
 mkdir -p /usr/share/caddy/$AUUID && wget -O /usr/share/caddy/$AUUID/StoreFiles $StoreFiles
 wget -P /usr/share/caddy/$AUUID -i /usr/share/caddy/$AUUID/StoreFiles
 
+#准备客服端链接，
 for file in $(ls /usr/share/caddy/$AUUID); do
     [[ "$file" != "StoreFiles" ]] && echo \<a href=\""$file"\" download\>$file\<\/a\>\<br\> >>/usr/share/caddy/$AUUID/ClickToDownloadStoreFiles.html
 done
@@ -17,6 +18,6 @@ done
 # start
 tor &
 
-/xray -config /xray.json &
+/xray -config /xray.json &						#备置xray.				
 
-caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+caddy run --config /etc/caddy/Caddyfile --adapter caddyfile		#使用 caddyfile来配置caddy,
